@@ -423,6 +423,10 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            header {
+                padding: 0.5rem 5%;
+            }
+
             .nav-links {
                 display: none;
             }
@@ -432,7 +436,19 @@
             }
 
             .navbar {
-                padding-top: 1rem;
+                padding-top: 0;
+            }
+
+            .logo {
+                gap: 0.5rem;
+            }
+
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+
+            .logo-img {
+                height: 40px;
             }
 
             .hero h1 {
