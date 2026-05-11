@@ -127,7 +127,7 @@
         }
 
         .logo-img {
-            height: 60px;
+            height: 100px;
             width: auto;
         }
 
@@ -146,25 +146,6 @@
 
         .nav-links li a:hover {
             color: var(--secondary-color);
-        }
-
-        .instagram-btn {
-            color: white;
-            font-size: 1.5rem;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .instagram-btn:hover {
-            background-color: var(--secondary-color);
-            transform: scale(1.1);
         }
 
         .menu-toggle {
