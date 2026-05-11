@@ -52,6 +52,149 @@ function toggleMenu() {
     });
 }
 
+// ===== LIGHTBOX GALLERY =====
+let currentImageIndex = 0;
+let galleryImages = [];
+
+function openLightbox(imageSrc) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    
+    // Get all gallery images
+    galleryImages = Array.from(document.querySelectorAll('.gallery-item img')).map(img => img.src);
+    currentImageIndex = galleryImages.indexOf(imageSrc);
+    
+    lightboxImg.src = imageSrc;
+    lightbox.classList.add('active');
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+}
+
+function nextImage() {
+    currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+    document.getElementById('lightboxImg').src = galleryImages[currentImageIndex];
+}
+
+function previousImage() {
+    currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+    document.getElementById('lightboxImg').src = galleryImages[currentImageIndex];
+}
+
+// Close lightbox when clicking outside image
+document.addEventListener('click', function(event) {
+    const lightbox = document.getElementById('lightbox');
+    if (event.target === lightbox) {
+        closeLightbox();
+    }
+});
+
+// Keyboard navigation for lightbox
+document.addEventListener('keydown', function(event) {
+    if (document.getElementById('lightbox').classList.contains('active')) {
+        if (event.key === 'ArrowRight') nextImage();
+        if (event.key === 'ArrowLeft') previousImage();
+        if (event.key === 'Escape') closeLightbox();
+    }
+});
+
+// ===== EVENT REGISTRATION MODAL =====
+function openEventModal() {
+    document.getElementById('eventModal').style.display = 'flex';
+}
+
+function closeEventModal() {
+    document.getElementById('eventModal').style.display = 'none';
+}
+
+// Handle event registration form
+document.addEventListener('DOMContentLoaded', function() {
+    const eventForm = document.getElementById('eventForm');
+    if (eventForm) {
+        eventForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for registering! We will send you confirmation details.');
+            closeEventModal();
+            eventForm.reset();
+        });
+    }
+});
+
+// ===== NEWSLETTER POPUP =====
+function openNewsletter() {
+    document.getElementById('newsletterModal').style.display = 'flex';
+}
+
+function closeNewsletter() {
+    document.getElementById('newsletterModal').style.display = 'none';
+}
+
+// Show newsletter popup after 30 seconds
+setTimeout(function() {
+    openNewsletter();
+}, 30000);
+
+// Handle newsletter form submissions
+document.addEventListener('DOMContentLoaded', function() {
+    // Newsletter popup form
+    const newsletterModal = document.getElementById('newsletterModal');
+    if (newsletterModal) {
+        const form = newsletterModal.querySelector('form');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing to our newsletter!');
+            closeNewsletter();
+            form.reset();
+        });
+    }
+
+    // Newsletter footer form
+    const footerForm = document.querySelector('.newsletter-footer-form');
+    if (footerForm) {
+        footerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing to our newsletter!');
+            footerForm.reset();
+        });
+    }
+});
+
+// ===== SMOOTH SCROLL NAVIGATION =====
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        // Close mobile menu if open
+        const navLinks = document.querySelector('.nav-links');
+        if (navLinks.style.display === 'flex') {
+            navLinks.style.display = 'none';
+        }
+    });
+});
+
+// ===== SCROLL ANIMATIONS =====
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// Apply scroll animations to event cards and gallery items
+document.addEventListener('DOMContentLoaded', function() {
+    const elementsToAnimate = document.querySelectorAll('.event-card, .gallery-item, .section-subtitle');
+    elementsToAnimate.forEach(element => {
+        observer.observe(element);
+    });
+});
+
 // Initialize the page
 window.onload = function() {
     // Check for age verification cookie when page loads
