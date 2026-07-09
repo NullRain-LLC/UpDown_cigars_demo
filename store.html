@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Up Down Cigar - Demo Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeEventModal()">&times;</span>
+            <h2>Reserve a Tasting</h2>
+            <form id="eventForm">
+                <div class="form-group">
+                    <label for="eventName">Name</label>
+                    <input type="text" id="eventName" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventEmail">Email</label>
+                    <input type="email" id="eventEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventPhone">Phone</label>
+                    <input type="tel" id="eventPhone" required>
+                </div>
+                <button type="submit" class="cta-button">Reserve Seat</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="newsletterModal" class="modal">
+        <div class="modal-content newsletter-modal">
+            <span class="close-button" onclick="closeNewsletter()">&times;</span>
+            <h2>Stay in the Loop</h2>
+            <p>Get weekly cigar recommendations and event updates from Up Down Cigar.</p>
+            <form id="newsletterForm">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="cta-button">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="ageVerificationModal" class="modal active">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2>Age Verification</h2>
+            <p>Are you 21 years or older?</p>
+            <div class="age-options">
+                <button id="yes21" onclick="allowAccess()">Yes, I’m 21 or older</button>
+                <button id="no21" onclick="blockAccess()">No, I’m under 21</button>
+            </div>
+        </div>
+    </div>
+
+    <header id="header">
+        <nav class="navbar">
+            <a href="store.html" class="logo">
+                <img src="image/UDTFLAGLOGO2020notext.png" alt="Up Down Cigar Logo" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="store.html#shop" class="nav-link">Shop</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" aria-label="Toggle navigation">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="store-hero" id="home">
+            <div class="store-hero-content">
+                <p class="eyebrow">Premium cigar boutique</p>
+                <h1>Curated cigars, accessories, and lounge favorites.</h1>
+                <p>Explore a polished demo storefront designed for a modern cigar shop experience.</p>
+                <div class="hero-actions">
+                    <a href="#shop" class="cta-button">Browse Collection</a>
+                    <button class="secondary-button" onclick="openEventModal()">Join a Tasting</button>
+                </div>
+            </div>
+            <div class="store-hero-card">
+                <p class="eyebrow">Featured bundle</p>
+                <h3>Casa Grande Reserve</h3>
+                <p>Three premium cigars and a cedar travel case.</p>
+                <span>$89.00</span>
+            </div>
+        </section>
+
+        <section class="store-intro" id="about">
+            <div>
+                <p class="eyebrow">Why shop with us</p>
+                <h2>Hand-selected favorites for every palate.</h2>
+            </div>
+            <div class="intro-highlights">
+                <div>
+                    <h3>Fresh arrivals</h3>
+                    <p>Discover limited blends and customer favorites each month.</p>
+                </div>
+                <div>
+                    <h3>Expert guidance</h3>
+                    <p>Our team helps pair cigars with your preferred flavor profile.</p>
+                </div>
+                <div>
+                    <h3>Fast pickup</h3>
+                    <p>Order online and pick up your selection in-store the same day.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="store-section" id="shop">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">Demo store</p>
+                    <h2>Pick your favorites</h2>
+                </div>
+                <div class="filter-list">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="cigars">Cigars</button>
+                    <button class="filter-btn" data-filter="accessories">Accessories</button>
+                    <button class="filter-btn" data-filter="humidors">Humidors</button>
+                </div>
+            </div>
+
+            <div class="store-layout">
+                <div class="products-grid" id="productGrid"></div>
+
+                <aside class="cart-panel">
+                    <div class="cart-header">
+                        <h3>Your Cart</h3>
+                        <p id="cartCountText">0 items selected</p>
+                    </div>
+                    <div id="cartItems" class="cart-items"></div>
+                    <div class="cart-summary">
+                        <p>Total <strong id="cartTotal">$0.00</strong></p>
+                        <button id="checkoutBtn" class="cta-button full-width">Checkout Demo</button>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <p>&copy; 2026 Up Down Cigar. All rights reserved.</p>
+                <p class="disclaimer">Please enjoy our products responsibly. Must be 21 years or older to purchase tobacco products.</p>
+            </div>
+            <div class="footer-section newsletter-section">
+                <h3>Newsletter</h3>
+                <p>Get exclusive updates on events and new arrivals</p>
+                <form class="newsletter-footer-form" id="storeNewsletterForm">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit" class="cta-button">Subscribe</button>
+                </form>
+            </div>
+            <div class="footer-section">
+                <div class="social-media">
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="store-script.js"></script>
+</body>
+</html>
